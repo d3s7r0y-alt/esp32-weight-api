@@ -19,6 +19,7 @@ db.serialize(() => {
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "data")));
 
 function getInput(req) {
 	return {
@@ -89,9 +90,10 @@ app.get("/dashboard", (req, res) => {
 		<style>
 			:root { color-scheme: light; }
 			body { font-family: "Trebuchet MS", Verdana, sans-serif; background: #f6f4ef; color: #1b1b1b; margin: 0; padding: 24px; }
-			header { display: flex; align-items: baseline; gap: 12px; }
+			header { display: flex; align-items: center; gap: 12px; }
 			h1 { font-size: 28px; margin: 0; }
 			.status { font-size: 14px; color: #5a5a5a; }
+			.logo { height: 40px; width: auto; }
 			.card { background: #ffffff; border: 1px solid #e2e2e2; border-radius: 10px; padding: 16px; margin-top: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
 			table { width: 100%; border-collapse: collapse; }
 			th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eee; }
@@ -105,6 +107,7 @@ app.get("/dashboard", (req, res) => {
 	</head>
 	<body>
 		<header>
+			<img src="/images/eco-growth.png" alt="EGOR" class="logo" />
 			<h1>ESP32 Weight Log</h1>
 			<span class="pill">live</span>
 			<span class="status" id="status">loading...</span>
